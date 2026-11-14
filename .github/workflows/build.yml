@@ -18,4 +18,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: PokemonShield-apk
-          path: /home/runner/psa-build/PokemonShield.apk
+          path: /home/runner/psa-build/*.apk
