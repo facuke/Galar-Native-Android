@@ -1,0 +1,860 @@
+diff --git a/README.md b/README.md
+index 96d8ccb..b8005d8 100644
+--- a/README.md
++++ b/README.md
+@@ -78,6 +78,10 @@ Link battles, trades and Max Raids with nearby phones on the same Wi-Fi, or with
+ 
+ Import a mod `.zip` (`romfs/` file replacements, `exefs/*.pchtxt` code patches for 1.3.2) and switch mods on or off in ☰ → Mods. **Order and notes** sets the load order (higher wins), warns when two mods replace the same files, and keeps each mod's readme as its notes. If the game crashes with mods on, they're switched off on the next start. When the mods change, the app translates any new shaders they bring before the game starts (a short wait, once).
+ 
++### Cheats
++
++Mods → **Cheats** reads Atmosphère cheat files. Import `<first 16 characters of main's build ID>.txt` (Shield 1.3.2: `a16802625e7826bf.txt`), or a zip with the usual `<title ID>/cheats/<build ID>.txt` layout; every `[name]` becomes a switch, with a search box. Cheats that write the game's data (items, money, key-held codes, loops, registers: Atmosphère's code types 0–9, A and C0) work at once and follow the switches while you play; cheats that only patch the game's code are applied when the game starts (marked *Next start*). Unsupported code types (C1–C4, D, FFx) leave their cheat out, logged as `cheats: [name] left out`. Cheats are for single-player: local play is off while any is on, and a crash with cheats on switches them off. Files: `files/cheats/<build ID>.txt` and `files/cheats/toggles.txt` (one `[name]` per cheat that is on). Engine: `dm/host/cheat.c`, `dm/host/cheat_vm.c`.
++
+ ## Known gaps
+ 
+ - Nintendo's online services (Surprise Trade, online battles and raids).
+diff --git a/dm/android/app/assets/lang/es.tsv b/dm/android/app/assets/lang/es.tsv
+index 3b4e8e7..0684485 100644
+--- a/dm/android/app/assets/lang/es.tsv
++++ b/dm/android/app/assets/lang/es.tsv
+@@ -334,3 +334,15 @@ Vibrant	Vivo
+ Vibrant: muted colours lifted, a touch more contrast (less grey haze)	Vivo: los colores apagados se avivan, un poco más de contraste (menos bruma gris)
+ Cinematic	Cinemático
+ Cinematic: stronger contrast, a slightly warm tone	Cinemático: más contraste y un tono ligeramente cálido
++Cheats	Trucos
++Cheats (%d)	Trucos (%d)
++Import cheats (.txt or .zip)	Importar trucos (.txt o .zip)
++All off	Desactivar todos
++Search	Buscar
++Next start	Al reiniciar
++No cheats yet.	Aún no hay trucos.
++Cheats are for single-player. Local play is off while any is on.	Los trucos son para un jugador. El juego local se desactiva mientras haya alguno activo.
++Cheats that patch the game's code apply from the next start.	Los trucos que modifican el código del juego se aplican desde el próximo inicio.
++Imported %d cheat(s). Switch them on in the Cheats page.	Se importaron %d truco(s). Actívalos en la página Trucos.
++Could not import the cheats: %s	No se pudieron importar los trucos: %s
++Import an Atmosphere cheat file named after the first 16 characters of the game's build ID (for %s %s), or put it in Android/data/%s/files/cheats/.	Importa un archivo de trucos Atmosphere con el nombre de los primeros 16 caracteres del ID de compilación del juego (para %s %s), o ponlo en Android/data/%s/files/cheats/.
+diff --git a/dm/android/app/assets/lang/fr.tsv b/dm/android/app/assets/lang/fr.tsv
+index 704f3b7..76432e0 100644
+--- a/dm/android/app/assets/lang/fr.tsv
++++ b/dm/android/app/assets/lang/fr.tsv
+@@ -334,3 +334,15 @@ Vibrant	Vif
+ Vibrant: muted colours lifted, a touch more contrast (less grey haze)	Vif : les couleurs ternes ravivées, un peu plus de contraste (moins de voile gris)
+ Cinematic	Cinématique
+ Cinematic: stronger contrast, a slightly warm tone	Cinématique : plus de contraste, un ton légèrement chaud
++Cheats	Cheats
++Cheats (%d)	Cheats (%d)
++Import cheats (.txt or .zip)	Importer des cheats (.txt ou .zip)
++All off	Tout désactiver
++Search	Rechercher
++Next start	Au prochain lancement
++No cheats yet.	Aucun cheat pour le moment.
++Cheats are for single-player. Local play is off while any is on.	Les cheats sont pour le mode solo. Le jeu local est désactivé tant qu'un cheat est actif.
++Cheats that patch the game's code apply from the next start.	Les cheats qui modifient le code du jeu s'appliquent au prochain lancement.
++Imported %d cheat(s). Switch them on in the Cheats page.	%d cheat(s) importé(s). Activez-les dans la page Cheats.
++Could not import the cheats: %s	Impossible d'importer les cheats : %s
++Import an Atmosphere cheat file named after the first 16 characters of the game's build ID (for %s %s), or put it in Android/data/%s/files/cheats/.	Importez un fichier de cheats Atmosphere nommé d'après les 16 premiers caractères de l'ID de build du jeu (pour %s %s), ou placez-le dans Android/data/%s/files/cheats/.
+diff --git a/dm/android/app/assets/lang/ja.tsv b/dm/android/app/assets/lang/ja.tsv
+index 403436e..e7123aa 100644
+--- a/dm/android/app/assets/lang/ja.tsv
++++ b/dm/android/app/assets/lang/ja.tsv
+@@ -334,3 +334,15 @@ Vibrant	ビビッド
+ Vibrant: muted colours lifted, a touch more contrast (less grey haze)	ビビッド：くすんだ色を鮮やかにし、コントラストを少し強めます（灰色のもやを軽減）
+ Cinematic	シネマティック
+ Cinematic: stronger contrast, a slightly warm tone	シネマティック：コントラストを強め、やや暖かい色調
++Cheats	チート
++Cheats (%d)	チート (%d)
++Import cheats (.txt or .zip)	チートを読み込む（.txt / .zip）
++All off	すべてオフ
++Search	検索
++Next start	次回起動
++No cheats yet.	チートはまだありません。
++Cheats are for single-player. Local play is off while any is on.	チートは一人用です。オンのチートがある間はローカル通信は使えません。
++Cheats that patch the game's code apply from the next start.	ゲームのコードを書き換えるチートは次回起動から有効になります。
++Imported %d cheat(s). Switch them on in the Cheats page.	%d件のチートを読み込みました。チートのページでオンにしてください。
++Could not import the cheats: %s	チートを読み込めませんでした：%s
++Import an Atmosphere cheat file named after the first 16 characters of the game's build ID (for %s %s), or put it in Android/data/%s/files/cheats/.	ゲームのビルドIDの先頭16文字で名前を付けたAtmosphere形式のチートファイル（%s %s用）を読み込むか、Android/data/%s/files/cheats/ に置いてください。
+diff --git a/dm/android/app/assets/lang/pt.tsv b/dm/android/app/assets/lang/pt.tsv
+index 642efe3..98338ea 100644
+--- a/dm/android/app/assets/lang/pt.tsv
++++ b/dm/android/app/assets/lang/pt.tsv
+@@ -334,3 +334,15 @@ Vibrant	Vívido
+ Vibrant: muted colours lifted, a touch more contrast (less grey haze)	Vívido: cores apagadas realçadas, um pouco mais de contraste (menos névoa cinza)
+ Cinematic	Cinematográfico
+ Cinematic: stronger contrast, a slightly warm tone	Cinematográfico: mais contraste e um tom levemente quente
++Cheats	Cheats
++Cheats (%d)	Cheats (%d)
++Import cheats (.txt or .zip)	Importar cheats (.txt ou .zip)
++All off	Desligar todos
++Search	Buscar
++Next start	Próximo início
++No cheats yet.	Ainda não há cheats.
++Cheats are for single-player. Local play is off while any is on.	Os cheats são para um jogador. O jogo local fica desligado enquanto algum estiver ligado.
++Cheats that patch the game's code apply from the next start.	Os cheats que alteram o código do jogo valem a partir do próximo início.
++Imported %d cheat(s). Switch them on in the Cheats page.	Importados %d cheat(s). Ligue-os na página Cheats.
++Could not import the cheats: %s	Não foi possível importar os cheats: %s
++Import an Atmosphere cheat file named after the first 16 characters of the game's build ID (for %s %s), or put it in Android/data/%s/files/cheats/.	Importe um arquivo de cheats Atmosphere com o nome dos primeiros 16 caracteres do ID de build do jogo (para %s %s), ou coloque-o em Android/data/%s/files/cheats/.
+diff --git a/dm/android/app/java/com/nxnative/GameMenu.java b/dm/android/app/java/com/nxnative/GameMenu.java
+index 52dc87b..a01c492 100644
+--- a/dm/android/app/java/com/nxnative/GameMenu.java
++++ b/dm/android/app/java/com/nxnative/GameMenu.java
+@@ -118,7 +118,7 @@ public final class GameMenu {
+     private static void go(String p) {
+         page = p; Activity a = act; if (a == null || body == null) return;
+         rail.removeAllViews();
+-        String top = p.equals("remap") ? "controls" : p.equals("driver") ? "system" : p.equals("order") ? "mods" : p;
++        String top = p.equals("remap") ? "controls" : p.equals("driver") ? "system" : p.equals("order") || p.equals("cheats") ? "mods" : p;
+         for (String[] tb : TABS) {
+             boolean on = tb[0].equals(top);
+             TextView r = text(a, t(a, tb[1]), 15, on ? TEXT : SUB, on); r.setPadding(dp(a, 14), dp(a, 11), dp(a, 10), dp(a, 11));
+@@ -134,6 +134,7 @@ public final class GameMenu {
+             case "remap": remap(a); break;
+             case "mods": mods(a); break;
+             case "order": order(a); break;
++            case "cheats": cheats(a); break;
+             case "saves": saves(a); break;
+             case "online": online(a); break;
+             case "driver": driver(a); break;
+@@ -391,6 +392,7 @@ public final class GameMenu {
+         LinearLayout top = new LinearLayout(a); body.addView(top);
+         button(a, top, t(a, "Import a mod (.zip)"), true, () -> pick(a, Intent.ACTION_OPEN_DOCUMENT, null, REQ_MOD));
+         if (ms.size() > 1) button(a, top, t(a, "Order and notes"), false, () -> go("order"));
++        button(a, top, t(a, "Cheats"), false, () -> go("cheats"));
+         if (ms.isEmpty()) { note(a, t(a, "No mods yet.") + " " + where(a)); return; }
+         for (File m : ms) {
+             boolean on = !m.getName().startsWith("-");
+@@ -404,6 +406,100 @@ public final class GameMenu {
+         return t(a, "Put each mod in its own folder in Android/data/%s/files/mods/ — <mod>/romfs for files, <mod>/exefs for .pchtxt code patches (they must be made for %s %s).",
+                  a.getPackageName(), GameSettings.game(a)[1], GameSettings.version(a));
+     }
++
++    // ---------- cheats ----------
++    // Atmosphere cheat files: <files>/cheats/<first 8 bytes of main's build ID, 16 hex digits>.txt ("[name]" then lines of codes; "{name}" is a master code that always runs) and
++    // <files>/cheats/toggles.txt, one "[name]" a line for each cheat that is on. The engine (host/cheat.c) follows toggles.txt while the game runs: codes that write the game's
++    // data work at once; cheats that only patch the game's code (a "[name]" of nothing but "04000000 <offset> <value>" lines, marked "Next start") are applied when the game starts
++    private static File cheatsDir(Activity a) { return new File(GameSettings.dir(a), "cheats"); }
++    private static boolean isCheatFile(File f) { return f.isFile() && f.getName().matches("(?i)[0-9a-f]{16}\\.txt"); }
++    // { name, "1" when the cheat only patches code (applies from the next start) }, in file order, without master codes
++    private static List<String[]> cheatList(File dir) {
++        List<String[]> out = new ArrayList<>(); File[] fs = dir.listFiles(); if (fs == null) return out; Arrays.sort(fs);
++        for (File f : fs) { if (!isCheatFile(f)) continue;
++            try (BufferedReader r = new BufferedReader(new java.io.InputStreamReader(new java.io.FileInputStream(f), java.nio.charset.StandardCharsets.UTF_8))) {
++                String l, name = null; boolean patch = true, lines = false;
++                while (true) { l = r.readLine(); String q = l == null ? null : l.trim();
++                    if (q == null || q.startsWith("[") || q.startsWith("{")) {
++                        if (name != null) out.add(new String[] { name, patch && lines ? "1" : "0" });
++                        if (q == null) break;
++                        name = q.startsWith("[") && q.endsWith("]") ? q.substring(1, q.length() - 1).trim() : null; patch = true; lines = false; continue; }
++                    if (q.isEmpty() || name == null) continue; lines = true;
++                    if (!q.matches("(?i)0[0-9A-F]00[0-9A-F]{4}( [0-9A-F]{8}){2,3}")) patch = false; }
++            } catch (IOException e) { }
++        }
++        return out;
++    }
++    private static Set<String> cheatsOn(File dir) {
++        Set<String> on = new java.util.LinkedHashSet<>();
++        try (BufferedReader r = new BufferedReader(new java.io.InputStreamReader(new java.io.FileInputStream(new File(dir, "toggles.txt")), java.nio.charset.StandardCharsets.UTF_8))) {
++            String l; while ((l = r.readLine()) != null) { l = l.trim(); if (l.startsWith("[") && l.endsWith("]")) on.add(l.substring(1, l.length() - 1)); } } catch (IOException e) { }
++        return on;
++    }
++    private static void saveCheatsOn(File dir, Set<String> on) {
++        dir.mkdirs(); File tmp = new File(dir, "toggles.txt.part");
++        try (java.io.Writer w = new java.io.OutputStreamWriter(new FileOutputStream(tmp), java.nio.charset.StandardCharsets.UTF_8)) { for (String n : on) w.write("[" + n + "]\n"); } catch (IOException e) { return; }
++        tmp.renameTo(new File(dir, "toggles.txt"));   // (replaced whole: the engine never reads half a file)
++    }
++    private static void cheats(Activity a) {
++        File dir = cheatsDir(a); List<String[]> cs = cheatList(dir); Set<String> on = cheatsOn(dir);
++        heading(a, t(a, "Cheats (%d)", cs.size()));
++        if (RESTART.contains("cheats")) note(a, t(a, "Cheats that patch the game's code apply from the next start."));
++        LinearLayout top = new LinearLayout(a); body.addView(top);
++        button(a, top, t(a, "Import cheats (.txt or .zip)"), true, () -> pick(a, Intent.ACTION_OPEN_DOCUMENT, null, REQ_CHEAT));
++        if (!on.isEmpty()) button(a, top, t(a, "All off"), false, () -> { for (String[] c : cs) if (on.contains(c[0]) && c[1].equals("1")) RESTART.add("cheats"); saveCheatsOn(dir, new java.util.LinkedHashSet<String>()); redraw(); });
++        if (cs.isEmpty()) { note(a, t(a, "No cheats yet.") + " " + whereCheats(a)); return; }
++        note(a, t(a, "Cheats are for single-player. Local play is off while any is on."));
++        LinearLayout sc = card(a); EditText q = field(a, sc, t(a, "Search"));
++        final List<LinearLayout> rows = new ArrayList<>(); final List<String> keys = new ArrayList<>();
++        for (String[] c : cs) {
++            boolean isOn = on.contains(c[0]);
++            LinearLayout card = card(a); LinearLayout row = titleRow(a, card, c[0], c[1].equals("1") ? t(a, "Next start") : null); row.addView(pill(a, isOn ? t(a, "On") : t(a, "Off"), isOn));
++            card.setOnClickListener(v -> { Set<String> now = cheatsOn(dir); if (!now.remove(c[0])) now.add(c[0]); saveCheatsOn(dir, now); if (c[1].equals("1")) RESTART.add("cheats"); redraw(); });
++            rows.add(card); keys.add(c[0].toLowerCase(java.util.Locale.ROOT));
++        }
++        q.addTextChangedListener(new android.text.TextWatcher() {
++            @Override public void beforeTextChanged(CharSequence s, int st, int c, int af) { }
++            @Override public void onTextChanged(CharSequence s, int st, int b, int c) { }
++            @Override public void afterTextChanged(android.text.Editable e) {
++                String f = e.toString().trim().toLowerCase(java.util.Locale.ROOT);
++                for (int i = 0; i < rows.size(); i++) rows.get(i).setVisibility(f.isEmpty() || keys.get(i).contains(f) ? View.VISIBLE : View.GONE); }
++        });
++        note(a, whereCheats(a));
++    }
++    private static String whereCheats(Activity a) {
++        return t(a, "Import an Atmosphere cheat file named after the first 16 characters of the game's build ID (for %s %s), or put it in Android/data/%s/files/cheats/.",
++                 GameSettings.game(a)[1], GameSettings.version(a), a.getPackageName());
++    }
++    // A cheat file (.txt named by its 16-digit build ID) or a zip with such files, in the Atmosphere layout (<title ID>/cheats/<build ID>.txt) or loose; files of another game's
++    // title ID are left out. Returns how many cheats the imported files hold
++    static int installCheats(Activity a, InputStream source, String displayName) throws IOException {
++        File dir = cheatsDir(a); dir.mkdirs(); String tid = GameSettings.game(a)[0]; int files = 0;
++        if (displayName.toLowerCase(java.util.Locale.ROOT).endsWith(".txt")) {
++            String stem = displayName.substring(0, displayName.length() - 4);
++            if (!stem.matches("(?i)[0-9a-f]{16}")) throw new IOException("name the file after the first 16 characters of the build ID (for example a16802625e7826bf.txt)");
++            files += saveCheatFile(dir, stem, source);
++        } else {
++            try (ZipInputStream z = new ZipInputStream(source)) { ZipEntry e;
++                while ((e = z.getNextEntry()) != null) {
++                    if (e.isDirectory()) continue; String p = e.getName().replace('\\', '/'); if (p.contains("..")) continue;
++                    String[] parts = p.split("/"); String last = parts[parts.length - 1];
++                    if (!last.matches("(?i)[0-9a-f]{16}\\.txt")) continue;
++                    boolean other = false; for (String q : parts) if (q.matches("(?i)0100[0-9a-f]{12}") && !q.equalsIgnoreCase(tid)) other = true;   // (another game's title ID)
++                    if (other) continue;
++                    files += saveCheatFile(dir, last.substring(0, 16), z); } }
++        }
++        if (files == 0) throw new IOException("no cheat file for this game in it");
++        int n = 0; for (String[] c : cheatList(dir)) n++; return n;
++    }
++    private static int saveCheatFile(File dir, String id, InputStream in) throws IOException {
++        java.io.ByteArrayOutputStream bo = new java.io.ByteArrayOutputStream(); byte[] b = new byte[1 << 14]; int k;
++        while ((k = in.read(b)) > 0) { bo.write(b, 0, k); if (bo.size() > (8 << 20)) throw new IOException("the cheat file is larger than 8 MB"); }
++        File out = new File(dir, id.toLowerCase(java.util.Locale.ROOT) + ".txt"), tmp = new File(dir, out.getName() + ".part");
++        try (OutputStream o = new FileOutputStream(tmp)) { o.write(bo.toByteArray()); }
++        if (!tmp.renameTo(out)) { out.delete(); if (!tmp.renameTo(out)) throw new IOException("could not move it into place"); }
++        return 1;
++    }
+     // the load order: higher wins; each mod's notes, the files it shares, moving it, deleting it
+     private static void order(Activity a) {
+         List<File> ms = modList(a); Map<File, Map<File, Integer>> cf = conflicts(ms);
+@@ -579,7 +675,7 @@ public final class GameMenu {
+     }
+ 
+     // ---------- files: save data out and in, mods and drivers in (the system file picker; GameActivity.onActivityResult hands the answer here) ----------
+-    static final int REQ_EXPORT = 101, REQ_IMPORT = 102, REQ_MOD = 103, REQ_DRIVER = 104, REQ_LSFG = 105;
++    static final int REQ_EXPORT = 101, REQ_IMPORT = 102, REQ_MOD = 103, REQ_DRIVER = 104, REQ_LSFG = 105, REQ_CHEAT = 106;
+     private static void pick(Activity a, String action, String name, int req) {
+         // (to open, any file: ZIPs saved by browsers and chat apps are often typed otherwise, and the picker greyed them out; a save ZIP is checked when read)
+         Intent i = new Intent(action); i.addCategory(Intent.CATEGORY_OPENABLE); i.setType(Intent.ACTION_OPEN_DOCUMENT.equals(action) ? "*/*" : "application/zip");
+@@ -587,7 +683,7 @@ public final class GameMenu {
+         a.startActivityForResult(i, req);
+     }
+     static boolean onResult(Activity a, int req, int res, Intent data) {
+-        if (req != REQ_EXPORT && req != REQ_IMPORT && req != REQ_MOD && req != REQ_DRIVER && req != REQ_LSFG) return false;
++        if (req != REQ_EXPORT && req != REQ_IMPORT && req != REQ_MOD && req != REQ_DRIVER && req != REQ_LSFG && req != REQ_CHEAT) return false;
+         Uri u = res == Activity.RESULT_OK && data != null ? data.getData() : null; if (u == null) return true;
+         File files = GameSettings.dir(a);
+         new Thread(() -> {
+@@ -607,6 +703,9 @@ public final class GameMenu {
+                     try (InputStream in = a.getContentResolver().openInputStream(u)) {
+                         int n = SaveImport.install(in, new File(files, "save_import"), displayName(a, u));
+                         msg = t(a, "Imported %d save file(s). Close the game and start it again to load it (your current save is kept as a backup).", n) + " (" + SaveImport.lastFiles + ")"; }
++                } else if (req == REQ_CHEAT) {
++                    try (InputStream in = a.getContentResolver().openInputStream(u)) { int n = installCheats(a, in, displayName(a, u));
++                        msg = t(a, "Imported %d cheat(s). Switch them on in the Cheats page.", n); }
+                 } else {
+                     String name = displayName(a, u).replaceAll("(?i)\\.zip$", "").replaceAll("[^A-Za-z0-9 ._()\\[\\]-]", "_").trim();
+                     if (name.isEmpty() || name.startsWith(".") || name.startsWith("-")) name = "mod";
+@@ -615,11 +714,11 @@ public final class GameMenu {
+                         msg = t(a, "Mod \"%s\" installed (%d files). It is used from the next start.", name, n); }
+                 }
+             } catch (IOException | SecurityException e) {
+-                msg = t(a, req == REQ_EXPORT ? "Could not export the save: %s" : req == REQ_IMPORT ? "Could not import the save: %s" : "Could not install the mod: %s", e.getMessage()); }
++                msg = t(a, req == REQ_EXPORT ? "Could not export the save: %s" : req == REQ_IMPORT ? "Could not import the save: %s" : req == REQ_CHEAT ? "Could not import the cheats: %s" : "Could not install the mod: %s", e.getMessage()); }
+             final String m = msg;
+             a.runOnUiThread(() -> {   // (the answer in the panel's status line, on the page it belongs to)
+                 if (dlg == null) open(a, null);
+-                if (req == REQ_MOD) { RESTART.add("mods"); go("mods"); } else if (req == REQ_DRIVER) go("driver"); else if (req == REQ_LSFG) redraw(); else go("saves");
++                if (req == REQ_MOD) { RESTART.add("mods"); go("mods"); } else if (req == REQ_CHEAT) go("cheats"); else if (req == REQ_DRIVER) go("driver"); else if (req == REQ_LSFG) redraw(); else go("saves");
+                 say(m);
+             });
+         }).start();
+diff --git a/dm/android/app/jni/android_main.c b/dm/android/app/jni/android_main.c
+index 7576099..c7732d0 100644
+--- a/dm/android/app/jni/android_main.c
++++ b/dm/android/app/jni/android_main.c
+@@ -336,6 +336,17 @@ static int mods_on(const char *mods) {   // how many mods are on (what mods_romf
+         if ((nm[0] != '.' && nm[0] != '-' && !stat(a, &st) && S_ISDIR(st.st_mode)) || (l > 7 && !strcasecmp(nm + l - 7, ".pchtxt"))) on++; free(ents[i]); }
+     free(ents); return on;
+ }
++// Cheats (host/cheat.c): files/cheats/toggles.txt lists the ones that are on, one "[name]" a line. They count with the mods for local play and for the crash guard
++static int cheats_on(void) {
++    char p[1200]; snprintf(p, sizeof p, "%s/cheats/toggles.txt", g_files); FILE *f = fopen(p, "r"); if (!f) return 0;
++    char ln[512]; int n = 0; while (fgets(ln, sizeof ln, f)) { const char *t = ln; while (*t == ' ' || *t == '\t') t++; if (*t == '[') n++; }
++    fclose(f); return n;
++}
++static int cheats_off(void) {   // every cheat switched off; returns how many were on
++    int n = cheats_on(); if (!n) return 0;
++    char p[1200]; snprintf(p, sizeof p, "%s/cheats/toggles.txt", g_files); FILE *f = fopen(p, "w"); if (f) fclose(f);
++    return n;
++}
+ static void boot_guard(const char *mods) {
+     snprintf(g_boot_path, sizeof g_boot_path, "%s/boot_state", g_files);
+     char prev[512] = ""; FILE *f = fopen(g_boot_path, "r"); if (f) { size_t k = fread(prev, 1, sizeof prev - 1, f); prev[k] = 0; fclose(f); }
+@@ -344,16 +355,16 @@ static void boot_guard(const char *mods) {
+         const char *drv = getenv("DM_VK_DRIVER"); int stock = !drv || !*drv;
+         fprintf(stderr, "boot: the last run crashed (%s)\n", device ? "after the graphics device came up" : "before the graphics device came up");
+         if (device) setenv("DM_LAST_CRASH_DEVICE", "1", 1);   // (nvn_vk.c: a start that went without the dma-buf heap route and crashed anyway sends the next one back to it)
+-        if (had_mods) { int n = mods_off(mods); if (n) { char t[200]; snprintf(t, sizeof t, "The game closed while %d mod%s were on, so they are switched off. Switch them back on in the menu, Mods.", n, n == 1 ? "" : "s"); notice("mods", t); } }
++        if (had_mods) { int n = mods_off(mods) + cheats_off(); if (n) { char t[200]; snprintf(t, sizeof t, "The game closed while %d mod%s were on, so they are switched off. Switch them back on in the menu, Mods.", n, n == 1 ? "" : "s"); notice("mods", t); } }
+         else if (stock && !strstr(prev, "playing") && !strstr(prev, "in the game's code") && !g_safe_advanced) {   // (a crash in the game's own code is the engine's to fix, not the driver's: no driver dialog; nor while safe_start has a safer level to try)
+             char gpu[256] = ""; char gp[1200]; snprintf(gp, sizeof gp, "%s/gpu.txt", g_files); FILE *g = fopen(gp, "r"); if (g) { if (!fgets(gpu, sizeof gpu, g)) gpu[0] = 0; fclose(g); }
+             char *nl = strchr(gpu, '\n'); if (nl) *nl = 0;
+             notice("driver", *gpu ? gpu : "unknown");
+         }
+     }
+-    { char n[16]; snprintf(n, sizeof n, "%d", mods_on(mods)); setenv("DM_MODS_ACTIVE", n, 1); }   // (hle_ldn.c: local play is off while mods are on)
++    { char n[16]; snprintf(n, sizeof n, "%d", mods_on(mods) + cheats_on()); setenv("DM_MODS_ACTIVE", n, 1); }   // (hle_ldn.c: local play is off while mods are on)
+     g_boot_fd = open(g_boot_path, O_WRONLY | O_CREAT | O_TRUNC, 0660);
+-    if (g_boot_fd >= 0) { char t[160]; int k = snprintf(t, sizeof t, "start driver %s mods %d\n", getenv("DM_VK_DRIVER") && *getenv("DM_VK_DRIVER") ? "custom" : "stock", mods_on(mods)); (void)!write(g_boot_fd, t, k); }
++    if (g_boot_fd >= 0) { char t[160]; int k = snprintf(t, sizeof t, "start driver %s mods %d\n", getenv("DM_VK_DRIVER") && *getenv("DM_VK_DRIVER") ? "custom" : "stock", mods_on(mods) + cheats_on()); (void)!write(g_boot_fd, t, k); }
+ }
+ static void *boot_guard_main(void *p) {
+     (void)p; int dev = 0; time_t t0 = time(NULL);
+@@ -791,7 +802,9 @@ static void host_start(void) {
+     { char m[4]; snprintf(m, sizeof m, "%d", DM_GAME_ANDROID_OPMODE); setenv("DM_OPMODE", m, 0); }   // the profile's android_op_mode (env.txt DM_OPMODE wins)
+ #endif   // real sound output (AAudio, compat/aaudio_unit.c); env.txt can set 0
+     // pipelines: every one the game makes is recorded here and built ahead at the next start, the list shipped with the game too, and the driver's compiled code kept
++    SETP("DM_CHEATS_DIR", "cheats");   // Atmosphere cheat files and toggles.txt (host/cheat.c); the cheat page of the menu writes them
+     SETP("DM_MODS_DIR", "mods");   // IPSwitch .pchtxt code mods, applied when their build ID matches (loader.c); env.txt may point elsewhere
++    snprintf(p, sizeof p, "%s/cheats", g_files); mkdir(p, 0770);
+     snprintf(p, sizeof p, "%s/mods", g_files); mkdir(p, 0770);   // made by the app itself, so it can read what is put there (a folder another user made, adb's for one, it cannot)
+     boot_guard(p);   // (before the mods are read: a crash with mods switches them off)
+     mods_romfs(p);
+diff --git a/dm/host/cheat.c b/dm/host/cheat.c
+new file mode 100644
+index 0000000..68cb8d5
+--- /dev/null
++++ b/dm/host/cheat.c
+@@ -0,0 +1,111 @@
++// Cheats (Atmosphère format): <cheats dir>/<first 8 bytes of main's build ID>.txt holds the codes, <cheats dir>/toggles.txt the ones that are on, one "[name]" a line
++// (DM_CHEATS_DIR, files/cheats in the app; the cheat menu writes toggles.txt). The game's memory is this process's memory, so the cheat VM (cheat_vm.c) writes it directly.
++//  * dm_cheat_static_patches: for loader.c, before the code is sealed: the code stores ("0" opcodes, main region) of the cheats that are on, for cheats that are only such stores.
++//    Code in main is read-only afterwards, so these are patches like a .pchtxt's and take effect from the next start.
++//  * dm_cheat_start: a thread that runs the enabled cheats about 60 times a second (heap, register, key and data stores). It follows toggles.txt while playing.
++// Reads and writes are checked against the regions the engine knows (main's image, the opened heap): an address outside them is dropped, so a stray code cannot crash the game.
++#include "dm.h"
++#include "cheat_vm.h"
++#include <pthread.h>
++#include <sys/stat.h>
++#include <unistd.h>
++
++int dm_guest_region(int type, uint64_t *base, size_t *size);   // hle_svc.c
++uint64_t dm_input_held(void);                                   // hle_hid.c
++
++static module_t *main_mod(void) { for (int i = 0; i < g_nmod; i++) if (!strcmp(g_mod[i].name, "main")) return &g_mod[i]; return NULL; }
++static int cheat_path(char *out, size_t n, const char *file) { const char *d = getenv("DM_CHEATS_DIR"); if (!d || !*d) return 0; snprintf(out, n, "%s/%s", d, file); return 1; }
++static int cheat_file(char *out, size_t n) {
++    module_t *m = main_mod(); if (!m || !m->build_id[0]) return 0;
++    char f[64]; snprintf(f, sizeof f, "%.16s.txt", m->build_id);
++    if (!cheat_path(out, n, f)) return 0;
++    struct stat st; if (!stat(out, &st)) return 1;
++    for (char *c = f; *c; c++) if (*c >= 'a' && *c <= 'f') *c -= 32;     // the file may be named in capitals
++    snprintf(f + 16, sizeof f - 16, ".txt"); if (!cheat_path(out, n, f)) return 0;
++    return !stat(out, &st);
++}
++// toggles.txt: the names in [ ] that are on
++static int toggles(char (**names)[CHEAT_NAME_MAX]) {
++    char p[1200]; *names = NULL; if (!cheat_path(p, sizeof p, "toggles.txt")) return 0;
++    FILE *f = fopen(p, "r"); if (!f) return 0;
++    int n = 0, cap = 0; char ln[512];
++    while (fgets(ln, sizeof ln, f)) {
++        char *t = ln; while (*t == ' ' || *t == '\t') t++; if (*t != '[') continue; char *e = strrchr(t, ']'); if (!e) continue; *e = 0;
++        if (n == cap) { cap = cap ? cap * 2 : 32; *names = realloc(*names, cap * sizeof **names); if (!*names) { fclose(f); return 0; } }
++        snprintf((*names)[n++], CHEAT_NAME_MAX, "%s", t + 1);
++    }
++    fclose(f); return n;
++}
++static int is_on(char (*on)[CHEAT_NAME_MAX], int non, const char *name) { for (int i = 0; i < non; i++) if (!strcmp(on[i], name)) return 1; return 0; }
++
++int dm_cheat_static_patches(dm_cheat_patch **out) {
++    *out = NULL;
++    char p[1200]; if (!cheat_file(p, sizeof p)) return 0;
++    cheat_t *c; int nc = cheat_parse(p, &c); if (!nc) return 0;
++    char (*on)[CHEAT_NAME_MAX]; int non = toggles(&on); int any = 0; for (int i = 0; i < nc; i++) if (!c[i].master && is_on(on, non, c[i].name)) any = 1;
++    dm_cheat_patch *v = NULL; int nv = 0;
++    for (int i = 0; any && i < nc; i++) {
++        if (!(c[i].master || is_on(on, non, c[i].name)) || c[i].why[0] || !c[i].flat) continue;
++        for (int k = 0; k < c[i].n; ) {
++            uint32_t w = c[i].code[k]; int T = (w >> 24) & 0xF, len = T == 8 ? 4 : 3;
++            if (((w >> 20) & 0xF) == 0 && ((w >> 16) & 0xF) == 0) {     // main region, no offset register
++                v = realloc(v, (nv + 1) * sizeof *v); if (!v) break;
++                dm_cheat_patch *q = &v[nv++]; q->off = (uint64_t)(w & 0xFF) << 32 | c[i].code[k + 1]; q->n = T;
++                uint64_t val = T == 8 ? (uint64_t)c[i].code[k + 2] << 32 | c[i].code[k + 3] : c[i].code[k + 2]; memcpy(q->b, &val, 8);
++            }
++            k += len;
++        }
++    }
++    cheat_free(c, nc); free(on); *out = v; return nv;
++}
++
++// ---- the runtime ----
++static int env_region(void *u, int t, uint64_t *b) {
++    (void)u; if (t == 0) { module_t *m = main_mod(); if (!m || !m->base) return 0; *b = (uint64_t)(uintptr_t)m->base; return 1; }
++    size_t sz; return dm_guest_region(t, b, &sz);
++}
++static int in_heap(uint64_t a, int n) { uint64_t b; size_t sz; return dm_guest_region(1, &b, &sz) && a >= b && (uint64_t)n <= sz && a - b <= sz - (uint64_t)n; }
++static int in_main(uint64_t a, int n, int write) {
++    module_t *m = main_mod(); if (!m || !m->base) return 0;
++    uint64_t b = (uint64_t)(uintptr_t)m->base, lo = write ? ((m->text_end + 0x3FFF) & ~0x3FFFull) : 0, hi = m->key_page_off ? m->key_page_off : m->size;   // writes: after the sealed code, before the key page
++    return a >= b + lo && a + (uint64_t)n <= b + hi && a + (uint64_t)n > a;
++}
++static int env_rd(void *u, uint64_t a, void *buf, int n) { (void)u; if (!in_heap(a, n) && !in_main(a, n, 0)) return 1; memcpy(buf, (void *)(uintptr_t)a, n); return 0; }
++static int env_wr(void *u, uint64_t a, const void *buf, int n) { (void)u; if (!in_heap(a, n) && !in_main(a, n, 1)) return 1; memcpy((void *)(uintptr_t)a, buf, n); return 0; }
++static uint64_t env_keys(void *u) { (void)u; return dm_input_held(); }
++
++static uint32_t *build(cheat_t *c, int nc, int *nout) {   // masters first, then the cheats that are on, when any is
++    char (*on)[CHEAT_NAME_MAX]; int non = toggles(&on), any = 0, total = 0; uint32_t *p = NULL; *nout = 0;
++    for (int i = 0; i < nc; i++) if (!c[i].master && !c[i].why[0] && is_on(on, non, c[i].name)) any = 1;
++    for (int pass = 0; any && pass < 2; pass++)
++        for (int i = 0; i < nc; i++) {
++            if (c[i].why[0] || !c[i].n || (c[i].master != (pass == 0))) continue;
++            if (!c[i].master && !is_on(on, non, c[i].name)) continue;
++            p = realloc(p, (total + c[i].n) * sizeof *p); if (!p) { free(on); return NULL; }
++            memcpy(p + total, c[i].code, c[i].n * sizeof *p); total += c[i].n;
++        }
++    free(on); *nout = total; return p;
++}
++static uint64_t stamp(const char *p) { struct stat st; return stat(p, &st) ? 0 : ((uint64_t)st.st_mtim.tv_sec * 1000000000ull + (uint64_t)st.st_mtim.tv_nsec) ^ ((uint64_t)st.st_size << 40) ^ 1; }
++static void *cheat_main(void *arg) {
++    (void)arg; char path[1200], tp[1200];
++    cheat_t *c = NULL; int nc = 0, tick = 0, np = 0; uint64_t fm = 0, tm = ~0ull; uint32_t *prog = NULL;
++    static const cheat_env env = { NULL, env_region, env_rd, env_wr, env_keys };
++    for (;; tick++, usleep(16000)) {
++        if (tick % 20 == 0) {   // about every 0.3 s: the cheat file and the toggles may change while playing (import, the menu)
++            if (cheat_file(path, sizeof path) && stamp(path) != fm) {
++                cheat_free(c, nc); fm = stamp(path); nc = cheat_parse(path, &c); tm = ~0ull;
++                int bad = 0; for (int i = 0; i < nc; i++) if (c[i].why[0]) { bad++; LOG("cheats: [%s] left out: %s", c[i].name, c[i].why); }
++                LOG("cheats: %d in %s, %d cannot run", nc, path, bad);
++            }
++            uint64_t t = cheat_path(tp, sizeof tp, "toggles.txt") ? stamp(tp) : 0;
++            if (t != tm) { tm = t; free(prog); prog = build(c, nc, &np); LOG("cheats: %d code words on", np); }
++        }
++        if (np) cheat_run(prog, np, &env);
++    }
++    return NULL;
++}
++void dm_cheat_start(void) {
++    const char *d = getenv("DM_CHEATS_DIR"); if (!d || !*d) return;
++    pthread_t th; if (!pthread_create(&th, NULL, cheat_main, NULL)) { pthread_detach(th); LOG("cheats: engine started (%s)", d); }
++}
+diff --git a/dm/host/cheat_vm.c b/dm/host/cheat_vm.c
+new file mode 100644
+index 0000000..3256403
+--- /dev/null
++++ b/dm/host/cheat_vm.c
+@@ -0,0 +1,135 @@
++// See cheat_vm.h. The semantics follow Atmosphère's dmnt cheat VM (libexosphere-independent reimplementation from its public code-type documentation).
++#include "cheat_vm.h"
++#include <ctype.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++
++static int hexw(const char *s, uint32_t *out) {
++    uint32_t v = 0; for (int i = 0; i < 8; i++) { char c = s[i]; int d = c >= '0' && c <= '9' ? c - '0' : c >= 'a' && c <= 'f' ? c - 'a' + 10 : c >= 'A' && c <= 'F' ? c - 'A' + 10 : -1; if (d < 0) return 0; v = v << 4 | (uint32_t)d; }
++    *out = v; return 1;
++}
++static void why_set(char *w, size_t n, const char *s) { if (w && n) snprintf(w, n, "%s", s); }
++
++int cheat_oplen(const uint32_t *c, int i, int n, char *why, size_t wsz) {
++    uint32_t w = c[i]; int t = w >> 28, T = (w >> 24) & 0xF, len;
++    switch (t) {
++    case 0: case 1: if (T != 1 && T != 2 && T != 4 && T != 8) { why_set(why, wsz, "bad width"); return 0; } len = T == 8 ? 4 : 3; break;
++    case 2: len = 1; break;
++    case 3: len = ((w >> 24) & 0xF) == 0 ? 2 : 1; if (((w >> 24) & 0xF) > 1) { why_set(why, wsz, "loop"); return 0; } break;
++    case 4: len = 3; break;
++    case 5: case 6: if (T != 1 && T != 2 && T != 4 && T != 8) { why_set(why, wsz, "bad width"); return 0; } len = t == 5 ? 2 : 3; break;
++    case 7: if (T != 1 && T != 2 && T != 4 && T != 8) { why_set(why, wsz, "bad width"); return 0; } len = T == 8 ? 3 : 2; break;
++    case 8: len = 1; break;
++    case 9: if (T != 1 && T != 2 && T != 4 && T != 8) { why_set(why, wsz, "bad width"); return 0; } len = (w >> 8 & 0xF) ? (T == 8 ? 3 : 2) : 1; break;
++    case 0xA: if (T != 1 && T != 2 && T != 4 && T != 8) { why_set(why, wsz, "bad width"); return 0; } { int o = w >> 8 & 0xF; if (o > 5) { why_set(why, wsz, "store offset type"); return 0; } len = (o == 2 || o == 3 || o == 5) ? 2 : 1; } break;
++    case 0xC: { int sub = (w >> 24) & 0xF;
++        if (sub != 0) { why_set(why, wsz, "code type C1+ (save/restore registers etc.)"); return 0; }
++        int X = (w >> 8) & 0xF, W = (w >> 20) & 0xF; if (W != 1 && W != 2 && W != 4 && W != 8) { why_set(why, wsz, "bad width"); return 0; }
++        if (X == 4) len = W == 8 ? 3 : 2; else if (X == 5) len = 1; else { why_set(why, wsz, "C0 operand type"); return 0; } break; }
++    default: { char b[40]; snprintf(b, sizeof b, "code type %X", t); why_set(why, wsz, b); return 0; }
++    }
++    if (i + len > n) { why_set(why, wsz, "truncated code"); return 0; }
++    return len;
++}
++
++int cheat_parse(const char *path, cheat_t **out) {
++    *out = NULL; FILE *f = fopen(path, "r"); if (!f) return 0;
++    cheat_t *v = NULL; int nv = 0, cap = 0, cur = -1; char ln[1024], first = 1;
++    while (fgets(ln, sizeof ln, f)) {
++        char *t = ln; if (first && (uint8_t)t[0] == 0xef && (uint8_t)t[1] == 0xbb && (uint8_t)t[2] == 0xbf) t += 3; first = 0;
++        while (isspace((unsigned char)*t)) t++;
++        size_t l = strlen(t); while (l && isspace((unsigned char)t[l - 1])) t[--l] = 0;
++        if (!*t) continue;
++        if (*t == '[' || *t == '{') {
++            char close = *t == '[' ? ']' : '}'; char *e = strrchr(t, close); if (!e) continue; *e = 0;
++            if (nv == cap) { cap = cap ? cap * 2 : 64; v = realloc(v, cap * sizeof *v); if (!v) { fclose(f); return 0; } }
++            cheat_t *c = &v[nv]; memset(c, 0, sizeof *c); c->master = close == '}';
++            char *nm = t + 1; while (isspace((unsigned char)*nm)) nm++; size_t nl = strlen(nm); while (nl && isspace((unsigned char)nm[nl - 1])) nm[--nl] = 0;
++            snprintf(c->name, sizeof c->name, "%s", nm); cur = nv++; continue;
++        }
++        if (cur < 0) continue;
++        cheat_t *c = &v[cur]; uint32_t w; int bad = 0; const char *p = t; uint32_t tmp[16]; int nt = 0;
++        while (*p) { while (isspace((unsigned char)*p)) p++; if (!*p) break; if (nt >= 16 || !hexw(p, &tmp[nt])) { bad = 1; break; } nt++; p += 8; if (*p && !isspace((unsigned char)*p)) { bad = 1; break; } }
++        (void)w; if (bad) { snprintf(c->why, sizeof c->why, "unreadable line"); continue; }
++        c->code = realloc(c->code, (c->n + nt) * sizeof *c->code); if (!c->code) { fclose(f); return 0; }
++        memcpy(c->code + c->n, tmp, nt * sizeof *tmp); c->n += nt;
++    }
++    fclose(f);
++    for (int k = 0; k < nv; k++) { cheat_t *c = &v[k]; if (c->why[0]) continue; int i = 0; c->flat = c->n > 0;
++        while (i < c->n) { int len = cheat_oplen(c->code, i, c->n, c->why, sizeof c->why); if (!len) break; if (c->code[i] >> 28) c->flat = 0; i += len; }
++        if (c->why[0]) c->flat = 0; }
++    *out = v; return nv;
++}
++void cheat_free(cheat_t *c, int n) { for (int i = 0; i < n; i++) free(c[i].code); free(c); }
++
++#define MAXSTEPS 200000
++static uint64_t mask(int T) { return T >= 8 ? ~0ull : (1ull << (T * 8)) - 1; }
++static uint64_t imm64(const uint32_t *c, int T) { return T == 8 ? ((uint64_t)c[0] << 32 | c[1]) : c[0]; }
++static int is_open(uint32_t w) { int t = w >> 28; return t == 1 || t == 8 || (t == 0xC && ((w >> 24) & 0xF) == 0); }
++// from c[i] (just after a failed condition's opcode) to after its End, or, with stop_else, after its Else when it has one
++static int skip(const uint32_t *c, int i, int n, int stop_else) {
++    int depth = 1;
++    while (i < n) { uint32_t w = c[i]; int len = cheat_oplen(c, i, n, NULL, 0); if (!len) return n;
++        if (is_open(w)) depth++;
++        else if (w >> 28 == 2) { int e = (w >> 24) & 0xF; if (e == 1 && depth == 1 && stop_else) return i + len; if (e == 0 && --depth == 0) return i + len; }
++        i += len; }
++    return n;
++}
++static int cond(int c, uint64_t a, uint64_t b) { switch (c) { case 1: return a > b; case 2: return a >= b; case 3: return a < b; case 4: return a <= b; case 5: return a == b; case 6: return a != b; } return 0; }
++static uint64_t calc(int op, uint64_t a, uint64_t b) {
++    switch (op) { case 0: return a + b; case 1: return a - b; case 2: return a * b; case 3: return b < 64 ? a << b : 0; case 4: return b < 64 ? a >> b : 0; case 5: return a & b; case 6: return a | b; case 7: return ~a; case 8: return a ^ b; case 9: return a; }
++    return a;
++}
++static uint64_t base_of(const cheat_env *e, int m) { uint64_t b = 0; if (m < 0 || m > 3 || !e->region(e->u, m, &b)) return 0; return b; }
++static int mem_rd(const cheat_env *e, uint64_t a, int T, uint64_t *v) { uint8_t b[8] = {0}; if (e->rd(e->u, a, b, T)) return 1; uint64_t x = 0; memcpy(&x, b, T); *v = x; return 0; }
++static void mem_wr(const cheat_env *e, uint64_t a, int T, uint64_t v) { uint8_t b[8]; memcpy(b, &v, 8); (void)e->wr(e->u, a, b, T); }
++
++int cheat_run(const uint32_t *c, int n, const cheat_env *env) {
++    uint64_t reg[16] = {0}; int loop_top[16]; for (int i = 0; i < 16; i++) loop_top[i] = -1;
++    int i = 0, steps = 0;
++    while (i < n && steps++ < MAXSTEPS) {
++        uint32_t w = c[i]; int len = cheat_oplen(c, i, n, NULL, 0); if (!len) break;
++        int t = w >> 28, T = (w >> 24) & 0xF; const uint32_t *a = c + i;
++        switch (t) {
++        case 0: {   // 0TMR00AA AAAAAAAA VVVVVVVV (VVVVVVVV)
++            int M = (w >> 20) & 0xF, R = (w >> 16) & 0xF; uint64_t base = base_of(env, M); if (!base) break;
++            uint64_t addr = base + (((uint64_t)(w & 0xFF) << 32 | a[1])) + reg[R];
++            mem_wr(env, addr, T, imm64(a + 2, T) & mask(T)); break; }
++        case 1: {   // 1TMC00AA AAAAAAAA VVVVVVVV (VVVVVVVV)
++            int M = (w >> 20) & 0xF, C = (w >> 16) & 0xF; uint64_t base = base_of(env, M), v, ok = 0;
++            if (base && !mem_rd(env, base + ((uint64_t)(w & 0xFF) << 32 | a[1]), T, &v)) ok = cond(C, v, imm64(a + 2, T) & mask(T));
++            if (!ok) { i = skip(c, i + len, n, 1); continue; } break; }
++        case 2: if (((w >> 24) & 0xF) == 1) { i = skip(c, i + len, n, 0); continue; } break;   // Else reached by the true branch: skip its else part
++        case 3: { int R = (w >> 16) & 0xF;
++            if (T == 0) { reg[R] = a[1]; loop_top[R] = i + len; }
++            else if (loop_top[R] >= 0) { if (reg[R] > 0) { reg[R]--; i = loop_top[R]; continue; } loop_top[R] = -1; }
++            break; }
++        case 4: reg[(w >> 16) & 0xF] = (uint64_t)a[1] << 32 | a[2]; break;
++        case 5: {   // 5TMRI0AA AAAAAAAA
++            int M = (w >> 20) & 0xF, R = (w >> 16) & 0xF, fromreg = ((w >> 12) & 0xF) != 0; uint64_t rel = (uint64_t)(w & 0xFF) << 32 | a[1], v, addr;
++            if (fromreg) addr = reg[R] + rel; else { uint64_t b = base_of(env, M); if (!b) break; addr = b + rel; }
++            if (!mem_rd(env, addr, T, &v)) { reg[R] = v; } break; }
++        case 6: {   // 6T0RIor0 VVVVVVVV VVVVVVVV
++            int R = (w >> 16) & 0xF, inc = (w >> 12) & 0xF, o = (w >> 8) & 0xF, r = (w >> 4) & 0xF; uint64_t addr = reg[R] + (o ? reg[r] : 0);
++            mem_wr(env, addr, T, ((uint64_t)a[1] << 32 | a[2]) & mask(T)); if (inc) reg[R] += T; break; }
++        case 7: {   // 7T0RC000 VVVVVVVV (VVVVVVVV)
++            int R = (w >> 16) & 0xF, C = (w >> 12) & 0xF; uint64_t v = imm64(a + 1, T);
++            if (C < 5) { reg[R] = calc(C, reg[R], v) & mask(T); } break; }
++        case 8: { uint64_t k = env->keys ? env->keys(env->u) : 0, m = w & 0x0FFFFFFF; if ((k & m) != m) { i = skip(c, i + len, n, 1); continue; } break; }
++        case 9: {   // 9TCRS0s0 VVVVVVVV (VVVVVVVV)
++            int C = (w >> 20) & 0xF, R = (w >> 16) & 0xF, S = (w >> 12) & 0xF, imm = (w >> 8) & 0xF, s = (w >> 4) & 0xF;
++            uint64_t b = imm ? imm64(a + 1, T) : reg[s]; reg[R] = calc(C, reg[S], b) & mask(T); break; }
++        case 0xA: {   // ATSRIOxa (aaaaaaaa)
++            int S = (w >> 20) & 0xF, R = (w >> 16) & 0xF, inc = (w >> 12) & 0xF, o = (w >> 8) & 0xF, x = (w >> 4) & 0xF; uint64_t imm = len == 2 ? ((uint64_t)(w & 0xF) << 32 | a[1]) : 0, addr;
++            switch (o) { case 0: addr = reg[R]; break; case 1: addr = reg[R] + reg[x]; break; case 2: addr = reg[R] + imm; break;
++                         case 3: addr = base_of(env, x) + imm; break; case 4: addr = base_of(env, x) + reg[R]; break; default: addr = base_of(env, x) + reg[R] + imm; }
++            mem_wr(env, addr, T, reg[S] & mask(T)); if (inc && o < 3) reg[R] += T; break; }
++        case 0xC: {   // C0TcSX## : compare register S with an immediate (X=4) or another register (X=5)
++            int W = (w >> 20) & 0xF, C = (w >> 16) & 0xF, S = (w >> 12) & 0xF, X = (w >> 8) & 0xF, R2 = (w >> 4) & 0xF;
++            uint64_t b = X == 4 ? imm64(a + 1, W) : reg[R2]; if (!cond(C, reg[S] & mask(W), b & mask(W))) { i = skip(c, i + len, n, 1); continue; } break; }
++        }
++        i += len;
++    }
++    return steps;
++}
+diff --git a/dm/host/cheat_vm.h b/dm/host/cheat_vm.h
+new file mode 100644
+index 0000000..1ef3fd2
+--- /dev/null
++++ b/dm/host/cheat_vm.h
+@@ -0,0 +1,36 @@
++// Atmosphère-format cheat codes: the file parser and the code interpreter (the cheat VM of Atmosphère's dmnt, the opcodes cheat files use). No game or host state in here:
++// memory, the region bases and the controller go through cheat_env, so the interpreter runs the same in the app (cheat.c) and in a unit test (tests/t_cheat.c).
++// Supported: 0 store static, 1 conditional (memory), 2 end / else, 3 loop, 4 load register (immediate), 5 load register (memory), 6 store to a register's address,
++// 7 legacy arithmetic, 8 key conditional, 9 register arithmetic, A store register to memory, C0 register conditional (immediate / register operand).
++// A code with any other opcode (C1-C4 save/restore, D, B, FFx ...) makes its cheat "unsupported": cheat_validate says so and the cheat is left out.
++#pragma once
++#include <stddef.h>
++#include <stdint.h>
++
++#define CHEAT_NAME_MAX 96
++typedef struct {
++    char name[CHEAT_NAME_MAX];
++    int master;           // {name}: always on
++    uint32_t *code; int n;
++    char why[80];         // empty when every opcode is supported, else the first one that is not
++    int flat;             // only "0" (store static) opcodes: no condition, loop or register is involved
++} cheat_t;
++
++typedef struct {
++    void *u;
++    int (*region)(void *u, int type, uint64_t *base);              // 0 main, 1 heap, 2 alias, 3 aslr: its base address; 0 = not available yet
++    int (*rd)(void *u, uint64_t a, void *buf, int n);              // 0 = ok, else the address cannot be read
++    int (*wr)(void *u, uint64_t a, const void *buf, int n);        // 0 = ok, else the address cannot be written (the write is dropped)
++    uint64_t (*keys)(void *u);                                     // buttons held now (nn::hid::NpadButton bits)
++} cheat_env;
++
++// Parse a cheat file ("[name]" / "{master}" headers, then lines of 8-digit hex words). Returns the number of cheats (0 if the file cannot be read); free with cheat_free
++int cheat_parse(const char *path, cheat_t **out);
++void cheat_free(cheat_t *c, int n);
++// Length in words of the opcode at c[i] (0 when it is not one this interpreter runs; why gets the reason)
++int cheat_oplen(const uint32_t *c, int i, int n, char *why, size_t whysz);
++// Runs a whole program (cheats' code joined in file order) once with zeroed registers. Returns the number of opcodes executed
++int cheat_run(const uint32_t *code, int n, const cheat_env *env);
++
++// One store the loader makes into main's image before the code is sealed (cheat.c dm_cheat_static_patches): offset in main, n bytes (1/2/4/8) in b, little endian
++typedef struct { uint64_t off; uint8_t b[8]; int n; } dm_cheat_patch;
+diff --git a/dm/host/hle_hid.c b/dm/host/hle_hid.c
+index 5044874..8ee0123 100644
+--- a/dm/host/hle_hid.c
++++ b/dm/host/hle_hid.c
+@@ -104,6 +104,12 @@ void hid_keys_init(void) {
+     pthread_t th; if (g_nsteps && !pthread_create(&th, NULL, keys_main, NULL)) { pthread_detach(th); LOG("DM_KEYS: %d steps", g_nsteps); }
+ }
+ 
++// The buttons held now, every source ORed, without taking the latched presses (the cheat engine's key conditions, cheat.c)
++uint64_t dm_input_held(void) {
++    uint64_t b = atomic_load(&g_btn) | atomic_load(&g_pad_btn);
++    if (now_ns() < atomic_load(&g_auto_until)) b |= atomic_load(&g_auto_btn);
++    return b & 0xffffull;
++}
+ static uint32_t connected_id(void) { return dm_opmode() == 0 ? NPAD_HANDHELD : NPAD_NO1; }
+ uint32_t hle_hid_connected_npad(void) { return connected_id(); }   // nfp's NFC device sits on this controller (hle_sdk16.c)
+ static uint32_t style_of(uint32_t id) { return id != connected_id() ? 0 : id == NPAD_HANDHELD ? STYLE_HANDHELD : STYLE_FULLKEY; }
+diff --git a/dm/host/hle_svc.c b/dm/host/hle_svc.c
+index 3bce0d7..3e6e5b7 100644
+--- a/dm/host/hle_svc.c
++++ b/dm/host/hle_svc.c
+@@ -23,6 +23,14 @@ static uint8_t *g_heap; static size_t g_heap_cur, g_heap_cap;
+ // The address range lies entirely within the currently opened (readable and writable) part of the guest heap: such reads need no kernel trap to check, memcpy directly (used where guest memory is read every tick, such as diag.c tk_rd)
+ int dm_guest_heap_readable(uint64_t a, size_t n) { uint64_t b = (uint64_t)(uintptr_t)g_heap; size_t cur = g_heap_cur; return g_heap && a >= b && n <= cur && a - b <= cur - n; }
+ static uint8_t *g_alias; static size_t g_alias_cap;
++// Region bases for the cheat engine (cheat.c): 1 heap (size = the opened part), 2 alias, 3 aslr (the whole guest block). 0 when the region is not there yet
++int dm_guest_region(int type, uint64_t *base, size_t *size) {
++    if (type == 1) { if (!g_heap || !g_heap_cur) return 0; *base = (uint64_t)(uintptr_t)g_heap; *size = g_heap_cur; return 1; }
++    if (type == 2) { if (!g_alias) return 0; *base = (uint64_t)(uintptr_t)g_alias; *size = 0; return 1; }
++    if (type == 3) { if (!g_as) return 0; *base = (uint64_t)(uintptr_t)g_as; *size = 0; return 1; }
++    return 0;
++}
++
+ static _Atomic uint64_t *g_alias_bits;   // alias region page bitmap (alias_pages)
+ static uint8_t *g_stack; static size_t g_stack_cap;
+ // The address lies in the guest address block (every guest thread stack is here: the game's own heap or the stack region); the big-stack entry (hle_bigstack.c) uses it to decide whether to switch stacks
+diff --git a/dm/host/loader.c b/dm/host/loader.c
+index 222bfea..f58c90f 100644
+--- a/dm/host/loader.c
++++ b/dm/host/loader.c
+@@ -487,6 +487,20 @@ static int pchtxt_dir(module_t *m, uint64_t lim, int64_t p0, int64_t p1) {
+     if (files) LOG("%s: mods folder %s: %d .pchtxt file(s), %d patch(es) applied to this module", m->name, d, files, total);
+     return total;
+ }
++// The cheats that are on and only store fixed values into main (cheat.c): applied like a .pchtxt's patches (offsets are relative to main's base, as in cheat files)
++#include "cheat_vm.h"
++extern int dm_cheat_static_patches(dm_cheat_patch **out) __attribute__((weak));
++static int cheats_apply(module_t *m, uint64_t lim, int64_t p0, int64_t p1) {
++    if (!dm_cheat_static_patches || strcmp(m->name, "main") || !m->build_id[0]) return 0;
++    dm_cheat_patch *v; int n = dm_cheat_static_patches(&v), applied = 0;
++    for (int i = 0; i < n; i++) {
++        if (v[i].off + v[i].n > lim) { LOG("[RED] cheat store at main+%#llx is outside the module, skipped", (unsigned long long)v[i].off); continue; }
++        if (overlaps_rewrite(m, v[i].off, v[i].n, p0, p1)) { LOG("[RED] cheat store at main+%#llx is code the host rewrote, skipped", (unsigned long long)v[i].off); continue; }
++        memcpy(m->base + v[i].off, v[i].b, v[i].n); applied++;
++    }
++    free(v); if (n) LOG("%s: %d of %d cheat store(s) applied", m->name, applied, n);
++    return applied;
++}
+ // Built-in patches. (No built-in 20:9 camera: the 16:9 that PR #48 patched, MOVK X9, #0x8e39 / #0x3fe3 at +0x607de8, is a camera object's default aspect, which
+ // the game replaces for the gameplay camera; patched, the picture was unchanged. DM_ASPECT=20:9 is the presentation alone, for a 20:9 .pchtxt mod.)
+ int dm_step_hz; uint8_t *dm_step_word;   // the high frame rate below: its rate and the game's step word, which hle_nvn.c vstep_tick rewrites every frame
+@@ -614,7 +628,7 @@ static void map_image(module_t *m, const char *dir) {
+         if (a == MAP_FAILED) die("%s mmap %#llx", m->name, (unsigned long long)(pre + m->size));
+         m->base = a + pre;
+         memcpy(m->base, raw, fl); memcpy(a, raw + fl, sz - fl); free(raw);
+-        int modded = pchtxt_dir(m, fl, m->patch_off, m->patch_off + (int64_t)m->patch_len); modded += builtin_patches(m, fl, m->patch_off, m->patch_off + (int64_t)m->patch_len, modded);
++        int modded = pchtxt_dir(m, fl, m->patch_off, m->patch_off + (int64_t)m->patch_len); modded += cheats_apply(m, fl, m->patch_off, m->patch_off + (int64_t)m->patch_len); modded += builtin_patches(m, fl, m->patch_off, m->patch_off + (int64_t)m->patch_len, modded);
+         install_key_page(m);
+         uint64_t rx = (m->text_end + 0x3FFF) & ~0x3FFFull;
+         if (mprotect(m->base, rx, PROT_READ | PROT_EXEC)) die("%s mprotect text", m->name);
+@@ -627,7 +641,7 @@ static void map_image(module_t *m, const char *dir) {
+     m->base = mmap(NULL, m->size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
+     if (m->base == MAP_FAILED) die("%s mmap", m->name);
+     memcpy(m->base, raw, sz); free(raw);
+-    int modded = pchtxt_dir(m, m->key_page_off, m->patch_off, (int64_t)sz); modded += builtin_patches(m, m->key_page_off, m->patch_off, (int64_t)sz, modded);
++    int modded = pchtxt_dir(m, m->key_page_off, m->patch_off, (int64_t)sz); modded += cheats_apply(m, m->key_page_off, m->patch_off, (int64_t)sz); modded += builtin_patches(m, m->key_page_off, m->patch_off, (int64_t)sz, modded);
+     install_key_page(m);
+     uint64_t rx = (m->text_end + 0x3FFF) & ~0x3FFFull;
+     if (mprotect(m->base, rx, PROT_READ | PROT_EXEC)) die("%s mprotect text", m->name);
+diff --git a/dm/host/main.c b/dm/host/main.c
+index b42edbe..2fdfa30 100644
+--- a/dm/host/main.c
++++ b/dm/host/main.c
+@@ -107,6 +107,7 @@ static void host_preload(int argc, char **argv) {
+     }
+     if (!n) { static const char *def[] = DM_GAME_MODULES; for (int k = 0; k < DM_GAME_NMOD && n < MAX_MOD; k++) names[n++] = def[k]; }   // default module list from the game profile's modules (Mario: main sdk)
+     load_modules(argv[1], names, n);
++    { extern void dm_cheat_start(void) __attribute__((weak)); if (dm_cheat_start) dm_cheat_start(); }   // the cheat engine (cheat.c; Android app: DM_CHEATS_DIR)
+     dm_sdk_major();   // logs the SDK version, which SDK-dependent behaviour follows (loader.c)
+     uint64_t ta = now_ns();
+     probe_install();   // DM_PROBE probes (for diagnostics)
+diff --git a/dm/host/tests/Makefile b/dm/host/tests/Makefile
+index 3188799..17cc6ec 100644
+--- a/dm/host/tests/Makefile
++++ b/dm/host/tests/Makefile
+@@ -4,7 +4,7 @@ B = build
+ # tests that use the game profile need GAME=<base game title ID> (there is no default game); GINC only expands when used, so tests without the profile build as before
+ GINC = $(if $(strip $(GAME)),-I../gen/$(GAME) -I../../games/$(GAME),$(error GAME is not set: make GAME=<base game title ID>: $(shell python3 ../../games/game.py list | awk -F'\t' '{printf "%s (%s)  ", $$1, $$3}')))
+ GAME_H = ../gen/$(GAME)/game_profile.h
+-run: $(B)/t_touch $(B)/t_oe $(B)/t_fs $(B)/t_thread_leak $(B)/t_fs_case $(B)/t_audio $(B)/t_audio_spsc $(B)/t_swkbd $(B)/t_altstack $(B)/t_condvar $(B)/t_condvar_old $(B)/t_resscale
++run: $(B)/t_touch $(B)/t_oe $(B)/t_fs $(B)/t_thread_leak $(B)/t_fs_case $(B)/t_audio $(B)/t_audio_spsc $(B)/t_swkbd $(B)/t_altstack $(B)/t_condvar $(B)/t_condvar_old $(B)/t_resscale $(B)/t_cheat $(B)/t_cheat_glue
+ 	$(B)/t_touch
+ 	$(B)/t_oe 2>/dev/null
+ 	$(B)/t_fs 2>/dev/null
+@@ -17,6 +17,8 @@ run: $(B)/t_touch $(B)/t_oe $(B)/t_fs $(B)/t_thread_leak $(B)/t_fs_case $(B)/t_a
+ 	$(B)/t_condvar
+ 	$(B)/t_condvar_old
+ 	$(B)/t_resscale 2>/dev/null
++	$(B)/t_cheat
++	$(B)/t_cheat_glue 2>/dev/null
+ $(GAME_H):
+ 	$(MAKE) -C .. game_profile GAME=$(GAME)
+ $(B)/t_touch: t_touch.c ../hle_touch.c ../front.h ../dm.h $(GAME_H) | $(B)
+@@ -55,3 +57,7 @@ $(B)/t_crash_line: t_crash_line.c ../crash_line.h ../dm.h $(GAME_H) | $(B)
+ 	cc -O1 -fPIE -pie -Wno-unused-function -I../../android/compat -I.. $(GINC) -o $@ t_crash_line.c -ldl
+ linux: $(B)/t_crash_line
+ 	$(B)/t_crash_line
++$(B)/t_cheat: t_cheat.c ../cheat_vm.c ../cheat_vm.h | $(B)
++	clang -O1 -Wall -I.. -o $@ t_cheat.c ../cheat_vm.c
++$(B)/t_cheat_glue: t_cheat_glue.c ../cheat.c ../cheat_vm.c ../cheat_vm.h ../dm.h $(GAME_H) | $(B)
++	clang -O1 -Wno-unused-function -I.. $(GINC) -o $@ t_cheat_glue.c ../cheat_vm.c
+diff --git a/dm/host/tests/t_cheat.c b/dm/host/tests/t_cheat.c
+new file mode 100644
+index 0000000..58837c6
+--- /dev/null
++++ b/dm/host/tests/t_cheat.c
+@@ -0,0 +1,75 @@
++// Unit test of the cheat VM and file parser (cheat_vm.c) against a fake guest memory. make -C dm/host/tests t_cheat   (needs no game profile)
++#include "../cheat_vm.h"
++#include <assert.h>
++#include <stdio.h>
++#include <string.h>
++#include <stdlib.h>
++
++static uint8_t mem[0x10000]; static uint64_t keys;
++#define MAINB 0x1000ull
++#define HEAPB 0x8000ull
++static int region(void *u, int t, uint64_t *b) { (void)u; if (t == 0) *b = MAINB; else if (t == 1) *b = HEAPB; else return 0; return 1; }
++static int rd(void *u, uint64_t a, void *buf, int n) { (void)u; if (a < MAINB || a + n > sizeof mem) return 1; memcpy(buf, mem + a, n); return 0; }
++static int wr(void *u, uint64_t a, const void *buf, int n) { (void)u; if (a < MAINB || a + n > sizeof mem) return 1; memcpy(mem + a, buf, n); return 0; }
++static uint64_t kk(void *u) { (void)u; return keys; }
++static const cheat_env env = { NULL, region, rd, wr, kk };
++static uint32_t r32(uint64_t a) { uint32_t v; memcpy(&v, mem + a, 4); return v; }
++static uint64_t r64(uint64_t a) { uint64_t v; memcpy(&v, mem + a, 8); return v; }
++static void run(const uint32_t *c, int n) { cheat_run(c, n, &env); }
++#define RUN(...) do { uint32_t c_[] = { __VA_ARGS__ }; run(c_, sizeof c_ / 4); } while (0)
++
++int main(void) {
++    // 0: stores to heap and main, widths, 64-bit (first word = high half), offset register
++    memset(mem, 0, sizeof mem);
++    RUN(0x04100000, 0x00000010, 0x0098967F);              assert(r32(HEAPB + 0x10) == 0x98967F);
++    RUN(0x01100000, 0x00000020, 0x000000AB);              assert(mem[HEAPB + 0x20] == 0xAB && mem[HEAPB + 0x21] == 0);
++    RUN(0x08000000, 0x00000030, 0x11223344, 0x55667788);  assert(r64(MAINB + 0x30) == 0x1122334455667788ull);
++    RUN(0x40010000, 0, 0x100, 0x04010000, 0x40, 0xCAFEBABE);   assert(r32(MAINB + 0x140) == 0xCAFEBABE);
++    RUN(0x04000000, 0x00FFFF00, 1);                        // outside the fake memory: dropped, no crash
++    // 1: conditional (1TMC: T=4 M=1 heap, C: 1 > 2 >= 3 < 4 <= 5 == 6 !=), else, nesting
++    memset(mem, 0, sizeof mem); *(uint32_t *)(mem + HEAPB) = 5;
++    RUN(0x14110000, 0, 5, 0x04000000, 0x10, 1, 0x20000000); assert(r32(MAINB + 0x10) == 0);      // 5 > 5 false
++    RUN(0x14120000, 0, 5, 0x04000000, 0x10, 1, 0x20000000); assert(r32(MAINB + 0x10) == 1);      // 5 >= 5
++    memset(mem + MAINB, 0, 0x100);
++    RUN(0x14160000, 0, 5, 0x04000000, 0x10, 1, 0x20000000); assert(r32(MAINB + 0x10) == 0);      // 5 != 5 false
++    *(uint32_t *)(mem + HEAPB) = 4;
++    RUN(0x14150000, 0, 5, 0x04000000, 0x10, 1, 0x21000000, 0x04000000, 0x14, 2, 0x20000000);
++    assert(r32(MAINB + 0x10) == 0 && r32(MAINB + 0x14) == 2);                                   // false: the else part only
++    *(uint32_t *)(mem + HEAPB) = 5; memset(mem + MAINB, 0, 0x100);
++    RUN(0x14150000, 0, 5, 0x04000000, 0x10, 1, 0x21000000, 0x04000000, 0x14, 2, 0x20000000);
++    assert(r32(MAINB + 0x10) == 1 && r32(MAINB + 0x14) == 0);                                   // true: the then part only
++    memset(mem + MAINB, 0, 0x100);
++    RUN(0x14150000, 0, 9, 0x14150000, 0, 5, 0x20000000, 0x04000000, 0x10, 1, 0x20000000, 0x04000000, 0x14, 3);
++    assert(r32(MAINB + 0x10) == 0 && r32(MAINB + 0x14) == 3);                                   // a false block skips its nested block's end
++    // 8: keys (8KKKKKKK: all of the mask held)
++    memset(mem, 0, sizeof mem); keys = 0x80;
++    RUN(0x80000280, 0x04000000, 0x10, 1, 0x20000000);      assert(r32(MAINB + 0x10) == 0);
++    keys = 0x2C0; RUN(0x80000280, 0x04000000, 0x10, 1, 0x20000000);   assert(r32(MAINB + 0x10) == 1);
++    // 3: loop (r0 = 4: the body runs 5 times); 6: store to [r3] and advance it
++    memset(mem, 0, sizeof mem);
++    RUN(0x40030000, 0, MAINB + 0x200, 0x30000000, 4, 0x64031000, 0, 0x77, 0x31000000);
++    for (int k = 0; k < 5; k++) assert(r32(MAINB + 0x200 + 4 * k) == 0x77);
++    assert(r32(MAINB + 0x200 + 20) == 0);
++    // 5 / 4 / A: a pointer chain: heap+0x40 holds a pointer to main+0x300; write 0xBEEF at pointer+0x10
++    memset(mem, 0, sizeof mem); *(uint64_t *)(mem + HEAPB + 0x40) = MAINB + 0x300;
++    RUN(0x58110000, 0x40, 0x40020000, 0, 0xBEEF, 0xA4210200, 0x10);
++    assert(r32(MAINB + 0x310) == 0xBEEF);
++    // 9: r4 = r2 + 1, stored through r1
++    RUN(0x40020000, 0, 10, 0x94042100, 1, 0x40010000, 0, MAINB + 0x400, 0xA4410000);
++    assert(r32(MAINB + 0x400) == 11);
++    // C0: compare a register with an immediate (C0TcSX##: T=4, c: ==, S=r5, X=4)
++    memset(mem, 0, sizeof mem);
++    RUN(0x40050000, 0, 7, 0xC0455400, 7, 0x04000000, 0x10, 1, 0x20000000);   assert(r32(MAINB + 0x10) == 1);
++    RUN(0x40050000, 0, 8, 0xC0455400, 7, 0x04000000, 0x14, 1, 0x20000000);   assert(r32(MAINB + 0x14) == 0);
++    // parse a file
++    FILE *f = fopen("/tmp/t_cheat_sample.txt", "w");
++    fputs("[100%捕捉 开]\n04000000 0077F6E8 529FFFE0\n\n[heap]\n04100000 45072DF4 0098967F\n\n{master}\n04000000 00000010 00000001\n\n[key]\n80000280\n04100000 00000008 00000009\n20000000\n\n[unsupported]\nC1000000 00000000\n", f); fclose(f);
++    cheat_t *c; int n = cheat_parse("/tmp/t_cheat_sample.txt", &c);
++    assert(n == 5);
++    assert(!strcmp(c[0].name, "100%捕捉 开") && c[0].flat && c[0].n == 3 && c[0].code[2] == 0x529FFFE0 && !c[0].why[0]);
++    assert(c[1].flat && c[2].master && c[2].flat);
++    assert(!c[3].flat && !c[3].why[0] && c[3].n == 5);
++    assert(c[4].why[0]);
++    cheat_free(c, n);
++    puts("t_cheat: ok"); return 0;
++}
+diff --git a/dm/host/tests/t_cheat_glue.c b/dm/host/tests/t_cheat_glue.c
+new file mode 100644
+index 0000000..30dea30
+--- /dev/null
++++ b/dm/host/tests/t_cheat_glue.c
+@@ -0,0 +1,33 @@
++// The cheat engine end to end against a fake main image and heap: a cheat file and toggles.txt in a temp folder, the static patches the loader would apply, and
++// the thread writing the heap. Needs the game profile (dm.h): make -C dm/host/tests GAME=<id> t_cheat_glue
++#include "dm.h"
++#include "../cheat.c"
++#include <assert.h>
++module_t g_mod[MAX_MOD]; int g_nmod;
++static uint8_t *heap; static size_t heap_sz = 0x10000; static uint64_t keys;
++int dm_guest_region(int type, uint64_t *base, size_t *size) { if (type == 1) { *base = (uint64_t)(uintptr_t)heap; *size = heap_sz; return 1; } return 0; }
++uint64_t dm_input_held(void) { return keys; }
++static void put(const char *path, const char *text) { FILE *f = fopen(path, "w"); assert(f); fputs(text, f); fclose(f); }
++int main(void) {
++    char dir[] = "/tmp/t_cheat_glueXXXXXX"; assert(mkdtemp(dir));
++    setenv("DM_CHEATS_DIR", dir, 1);
++    static uint8_t image[0x40000]; heap = calloc(1, heap_sz);
++    strcpy(g_mod[0].name, "main"); strcpy(g_mod[0].build_id, "a16802625e7826bf83b6f9708e475b91"); g_mod[0].base = image; g_mod[0].size = sizeof image;
++    g_mod[0].text_end = 0x10000; g_mod[0].key_page_off = 0x3C000; g_nmod = 1;
++    char p[256];
++    snprintf(p, sizeof p, "%s/A16802625E7826BF.txt", dir);   // the file named in capitals is found too
++    put(p, "[patch on]\n04000000 00000100 529FFFE0\n\n[heap money]\n04100000 00000040 0098967F\n\n[key]\n80000280\n04100000 00000050 00000001\n20000000\n\n[off]\n04100000 00000060 00000002\n");
++    dm_cheat_patch *v; assert(dm_cheat_static_patches(&v) == 0);           // nothing on: no patches
++    snprintf(p, sizeof p, "%s/toggles.txt", dir); put(p, "[patch on]\n[heap money]\n[key]\n");
++    int n = dm_cheat_static_patches(&v); assert(n == 1 && v[0].off == 0x100 && v[0].n == 4 && !memcmp(v[0].b, "\xE0\xFF\x9F\x52", 4)); free(v);
++    dm_cheat_start();
++    for (int i = 0; i < 100 && !*(uint32_t *)(heap + 0x40); i++) usleep(10000);
++    assert(*(uint32_t *)(heap + 0x40) == 0x98967F);
++    assert(*(uint32_t *)(heap + 0x50) == 0 && *(uint32_t *)(heap + 0x60) == 0);   // key not held, cheat off
++    keys = 0x280; for (int i = 0; i < 100 && !*(uint32_t *)(heap + 0x50); i++) usleep(10000);
++    assert(*(uint32_t *)(heap + 0x50) == 1);
++    snprintf(p, sizeof p, "%s/toggles.txt", dir); put(p, "[off]\n");                 // toggled live
++    for (int i = 0; i < 150 && !*(uint32_t *)(heap + 0x60); i++) usleep(10000);
++    assert(*(uint32_t *)(heap + 0x60) == 2);
++    puts("t_cheat_glue: ok"); return 0;
++}
